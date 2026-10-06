@@ -1,1 +1,18 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning"><title>GOPRO</title><script>location.replace("https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning");</script></head><body style="font-family:Arial,sans-serif"><p><a href="https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning">Ouvrir la vid&eacute;o / Open the video</a></p></body></html>
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>GOPRO</title>
+<noscript><meta http-equiv="refresh" content="0;url=https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning"></noscript></head>
+<body style="font-family:Arial,sans-serif"><p>Ouverture de la vid&eacute;o / Opening the video&hellip; <a href="https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning">OK</a></p>
+<script src="go-config.js"></script>
+<script>
+(function () {
+  var DEST = "https://www.youtube.com/watch?v=JLjl9gCRTwk&feature=planning", API = window.GOPRO_API || "", F = "planning", L = "en", done = false;
+  function go() { if (done) return; done = true; location.replace(DEST); }
+  var c = new URLSearchParams(location.search).get("c") || "";
+  if (!c || /[{}]/.test(c)) c = "(inconnu)";
+  try {
+    if (!API) { go(); return; }
+    fetch(API + "?f=" + encodeURIComponent(F) + "&c=" + encodeURIComponent(c) + "&l=" + L,
+          { mode: "no-cors", keepalive: true, cache: "no-store" }).then(go, go);
+  } catch (e) { go(); }
+  setTimeout(go, 2500);
+})();
+</script></body></html>
