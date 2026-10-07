@@ -8,10 +8,13 @@
   function go() { if (done) return; done = true; location.replace(DEST); }
   var c = new URLSearchParams(location.search).get("c") || "";
   if (!c || /[{}]/.test(c)) c = "(inconnu)";
+  var body = JSON.stringify({ f: F, c: c, l: L }), sent = false;
+  if (!API) { go(); return; }
+  try { if (navigator.sendBeacon) sent = navigator.sendBeacon(API, body); } catch (e) {}
+  if (sent) { setTimeout(go, 300); return; }
   try {
-    if (!API) { go(); return; }
-    fetch(API + "?f=" + encodeURIComponent(F) + "&c=" + encodeURIComponent(c) + "&l=" + L,
-          { mode: "no-cors", keepalive: true, cache: "no-store" }).then(go, go);
+    fetch(API, { method: "POST", mode: "no-cors", keepalive: true,
+                 headers: { "Content-Type": "text/plain" }, body: body }).then(go, go);
   } catch (e) { go(); }
   setTimeout(go, 2500);
 })();
